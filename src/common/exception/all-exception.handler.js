@@ -1,0 +1,11 @@
+function AllExceptionHandler(app){
+    app.use((err,req,res,next) => {
+        let status = err?.status ?? err?.code ?? err?.statusCode
+        if(!status || isNaN(status) || status > 511 || status < 200)
+        res.status(status).json({
+            message: err?.message ?? err.stack ?? 'InternalServerError'
+        })
+    })
+}
+
+module.exports = AllExceptionHandler
