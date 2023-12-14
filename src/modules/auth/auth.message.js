@@ -5,7 +5,8 @@ const AuthMessage = {
     OtpCodeExpired:'Otp code expired try new code please!',
     OtpCodeIsIncorrect: 'Otp code is incorrect',
     LoginSuccessfully:'You are login successfully',
-    LogoutSuccessfully:'You are logout successfully'
+    LogoutSuccessfully:'You are logout successfully',
+    InvalidMobileNumber:'Your mobile number is incorrect!'
 }
 
 module.exports = {

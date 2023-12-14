@@ -5,6 +5,7 @@ const CookieNames = require("../../common/constant/cookie.enum");
 const NodeEnv = require("../../common/constant/env.enum");
 require("dotenv").config();
 const { StatusCodes:  HttpStatus} = require("http-status-codes");
+const { getOtpSchema, checkOtpShema } = require("./auth.validate");
 
 
 class AuthController{
@@ -15,6 +16,7 @@ class AuthController{
     }
     async sendOtp(req,res,next){
         try {
+            await getOtpSchema.validateAsync(req.body)
             const {mobile} = req.body
             await this.#service.sendOtp(mobile)    
             return res.json({
@@ -26,6 +28,7 @@ class AuthController{
     }
     async checkOtp(req,res,next){
         try {
+            await checkOtpShema.validateAsync(req.body)
             const {mobile , code} = req.body
             const token = await this.#service.checkOtp(mobile,code)
             return res.cookie(CookieNames.AccessToken , token , {
